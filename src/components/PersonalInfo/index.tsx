@@ -8,28 +8,29 @@ interface User {
 }
 
 const initialValues ={
-    name: 'ali',
-    email: 'ali@gmail.com'
+    name: '',
+    email: ''
 }
 
 const validate = Yup.object().shape({
   name: Yup.string()
-    .max(7, "Must be 7 characters ling")
+    .max(5, "Must be 7 characters ling")
     .required("This field is required"),
   email: Yup.string()
     .email()
     .required("This field is required"),
 });
 
-const PersonalInfo = ({submit, formValues, setFormValues}: any) => {
+const PersonalInfo = ({submit, formValues, setFormValues,per, setPer}: any) => {
   return (
     <Formik
-      initialValues={formValues}
+      initialValues={per}
       validationSchema={validate}
       onSubmit={(values) => {
         submit(1)
         setFormValues({...values, ...formValues})
-        console.log("initialValues", initialValues);
+        setPer(values)
+
         
 
       }}

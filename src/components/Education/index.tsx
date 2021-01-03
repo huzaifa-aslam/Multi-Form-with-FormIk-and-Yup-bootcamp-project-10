@@ -19,16 +19,14 @@ const validate = Yup.object().shape({
     passingYear: Yup.number().required("This field is required"),
 });
 
-const PersonalInfo = ({submit, formValues, setFormValues}: any) => {
+const PersonalInfo = ({submit, formValues, setFormValues, setQualification, qualification}: any) => {
   return (
     <Formik
-      initialValues={formValues}
+      initialValues={qualification}
       validationSchema={validate}
       onSubmit={(values) => {
-        // console.log("values", values);
         setFormValues({...values, ...formValues})
-        // console.log('values',formValues)
-        console.log("edu", formValues);
+        setQualification(values)
 
 
         submit(2)

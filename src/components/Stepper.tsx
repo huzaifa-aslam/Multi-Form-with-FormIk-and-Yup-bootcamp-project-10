@@ -23,12 +23,12 @@ function getSteps() {
   return ['Select master blaster campaign settings', 'Create an ad group', 'Create an ad'];
 }
 
-function getStepContent(stepIndex: number, setActiveStep: any, formValues: any, setFormValues: any) {
+function getStepContent( stepIndex: number, setActiveStep: any, formValues: any, setFormValues: any,per: any, setPer: any, qualification: any, setQualification: any) {
   switch (stepIndex) {
     case 0:
-      return <PersonalInfo submit = {setActiveStep} setFormValues = {setFormValues} formValues={formValues} />;
+      return <PersonalInfo  submit = {setActiveStep} per={per} setPer={setPer}  setFormValues = {setFormValues} formValues={formValues} />;
     case 1:
-      return <Education  submit = {setActiveStep} setFormValues = {setFormValues} formValues={formValues} />;
+      return <Education  submit = {setActiveStep} qualification={qualification} setQualification={setQualification} setFormValues = {setFormValues} formValues={formValues} />;
     case 2:
       return <Review submit = {setActiveStep} formValues={formValues}/>;
     default:
@@ -39,9 +39,10 @@ function getStepContent(stepIndex: number, setActiveStep: any, formValues: any, 
 export default function HorizontalLabelPositionBelowStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [formValues, setFormValues] = useState()
+  const [formValues, setFormValues] = useState<any>()
+  const [per, setPer] = useState({name: '', email: ''})
+  const [qualification, setQualification] = useState({qualification: '', passingYear: ''})
   const steps = getSteps();
-console.log("values", formValues);
 
 
   return (
@@ -53,7 +54,7 @@ console.log("values", formValues);
           </Step>
         ))}
       </Stepper>
-     { getStepContent(activeStep, setActiveStep, formValues, setFormValues)}
+     { getStepContent(activeStep, setActiveStep, formValues, setFormValues,per, setPer, qualification,setQualification)}
     </div>
   );
 }
